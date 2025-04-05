@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Login Page</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #0a0a1a;
+            font-family: Arial, sans-serif;
+        }
+        .login-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            text-align: center;
+            position: relative;
+        }
+        h2 {
+            color: white;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+            color: white;
+            font-size: 16px;
+        }
+        input:focus {
+            outline: none;
+            border-bottom: 2px solid white;
+        }
+        .submit-btn {
+            background-color: #002233;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login Page With Some Animation</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button id="submit-btn" class="submit-btn">Submit</button>
+    </div>
+
+    <script>
+        const button = document.getElementById("submit-btn");
+        const username = document.getElementById("username");
+        const password = document.getElementById("password");
+        let isCorrect = false;
+
+        function moveButton() {
+            if (!isCorrect) {
+                const maxX = window.innerWidth - button.offsetWidth - 50;
+                const maxY = window.innerHeight - button.offsetHeight - 50;
+                const randomX = Math.floor(Math.random() * maxX);
+                const randomY = Math.floor(Math.random() * maxY);
+
+                button.style.position = "absolute";
+                button.style.left = ${randomX}px;
+                button.style.top = ${randomY}px;
+            }
+        }
+
+        button.addEventListener("mouseover", moveButton);
+
+        button.addEventListener("click", () => {
+            if (!isCorrect) {
+                moveButton();
+            }
+        });
+
+        function validateLogin() {
+            if (username.value === "simran" && password.value === "simmi") {
+                isCorrect = true;
+                button.style.position = "absolute";
+                button.style.left = "50%";
+                button.style.top = "80%";
+                button.style.transform = "translateX(-50%)";
+                setTimeout(() => {
+                    alert("✅ Login Successful!");
+                }, 300);
+            }
+        }
+
+        username.addEventListener("input", validateLogin);
+        password.addEventListener("input", validateLogin);
+    </script>
+</body>
+</html>
